@@ -1,0 +1,24 @@
+{
+    "id": "55DCC907",
+    "path": "~/averyblog/.Rprofile",
+    "project_path": ".Rprofile",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1616801349726.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "cursorPosition": "19,35",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1616801675,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1616801675825,
+    "read_only": false,
+    "read_only_alternatives": []
+}
