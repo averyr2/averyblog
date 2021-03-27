@@ -1,5 +1,5 @@
 ---
-title: Attempted post test
+title: World Happiness EDA
 author: Avery Rogers
 date: '2021-03-26'
 slug: attempted-post-test
@@ -9,4 +9,47 @@ tags: []
 
 
 
-<p>This is a test post.</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `Ladder score` = col_number(),
+##   upperwhisker = col_number(),
+##   lowerwhisker = col_number(),
+##   `Logged GDP per capita` = col_number(),
+##   `Healthy life expectancy` = col_number(),
+##   `Ladder score in Dystopia` = col_number()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Warning in (function (x, na.rm = FALSE) : NAs introduced by coercion</code></pre>
+<pre><code>## # A tibble: 149 x 20
+##    country region ladder_score std_error_ladde… upperwhisker lowerwhisker
+##    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;        &lt;dbl&gt;
+##  1 Finland Weste…         7.84 0,032                    7904         7780
+##  2 Denmark Weste…         7.62 0,035                    7687         7552
+##  3 Switze… Weste…         7.57 0,036                    7643         7500
+##  4 Iceland Weste…         7.55 0,059                    7670         7438
+##  5 Nether… Weste…         7.46 0,027                    7518         7410
+##  6 Norway  Weste…         7.39 0,035                    7462         7323
+##  7 Sweden  Weste…         7.36 0,036                    7433         7293
+##  8 Luxemb… Weste…         7.32 0,037                    7396         7252
+##  9 New Ze… North…         7.28 0,040                    7355         7198
+## 10 Austria Weste…         7.27 0,036                    7337         7198
+## # … with 139 more rows, and 14 more variables: log_gdp_pc &lt;dbl&gt;,
+## #   social_support &lt;dbl&gt;, healthy_life_expectancy &lt;dbl&gt;,
+## #   freedom_of_choice &lt;dbl&gt;, generosity &lt;dbl&gt;, perceptions_corruption &lt;dbl&gt;,
+## #   ladder_dystopia &lt;dbl&gt;, explained_log_gdp_pc &lt;chr&gt;,
+## #   explained_social_support &lt;chr&gt;, explained_life_expectancy &lt;chr&gt;,
+## #   explained_freedom_choices &lt;chr&gt;, explained_generosity &lt;chr&gt;,
+## #   explained_corruption &lt;chr&gt;, dystopia_residual &lt;chr&gt;</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 86 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 86 rows containing missing values (geom_point).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-5.png" width="672" /></p>

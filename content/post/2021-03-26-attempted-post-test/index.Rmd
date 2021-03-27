@@ -1,5 +1,5 @@
 ---
-title: Attempted post test
+title: World Happiness EDA
 author: Avery Rogers
 date: '2021-03-26'
 slug: attempted-post-test
@@ -7,4 +7,95 @@ categories: []
 tags: []
 ---
 
-This is a test post.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Libraries
+library(tidyverse)
+
+# Parameters
+current_ladders_data <- "~/Downloads/world_happiness/current_ladders.csv"
+historical_ladders_data <- "~/Downloads/world_happiness/historical_ladders.csv"
+current_mortality_data <- "~/Downloads/world_happiness/current_mortality.csv"
+#===============================================================================
+divide_1000 <- function(x, na.rm=FALSE) {
+  x / 1000 
+}
+
+make_decimal <- function(x, na.rm=FALSE) {
+  as.integer(str_sub(x, 3, -1)) / 1000 
+}
+# Code
+```
+
+```{r}
+current_ladders <- read_csv(current_ladders_data)
+
+current_ladders <- 
+  current_ladders %>% 
+  rename(
+    country = `Country name`,
+    region = `Regional indicator`,
+    ladder_score = `Ladder score`,
+    std_error_ladder_score = `Standard error of ladder score`,
+    log_gdp_pc = `Logged GDP per capita`,
+    social_support = `Social support`,
+    healthy_life_expectancy = `Healthy life expectancy`,
+    freedom_of_choice = `Freedom to make life choices`,
+    generosity = Generosity,
+    perceptions_corruption = `Perceptions of corruption`,
+    ladder_dystopia = `Ladder score in Dystopia`,
+    explained_log_gdp_pc = `Explained by: Log GDP per capita`,
+    explained_social_support = `Explained by: Social support`,
+    explained_life_expectancy = `Explained by: Healthy life expectancy`,
+    explained_freedom_choices = `Explained by: Freedom to make life choices`,
+    explained_generosity = `Explained by: Generosity`,
+    explained_corruption = `Explained by: Perceptions of corruption`,
+    dystopia_residual = `Dystopia + residual`
+  ) %>% 
+  mutate_at(
+    vars(social_support, freedom_of_choice, generosity, perceptions_corruption), 
+    make_decimal
+    ) %>% 
+  mutate_at(
+    vars(
+      ladder_score, 
+      log_gdp_pc,
+      healthy_life_expectancy
+    ), 
+    divide_1000
+  )
+```
+
+```{r}
+current_ladders 
+
+current_ladders %>% 
+  ggplot(aes(social_support, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
+  ggplot(aes(freedom_of_choice, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
+  ggplot(aes(log_gdp_pc, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
+  ggplot(aes(generosity, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
+  ggplot(aes(perceptions_corruption, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+
