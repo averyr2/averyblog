@@ -47,8 +47,7 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>{width=250px}
-My name is Avery Rogers, and I&amp;rsquo;m a student at Stanford University completing my MS in computer science and BA in economics. I&amp;rsquo;m fascinated by the world of data and statistics and am actively seeking a job in data science and analytics. My favorite package suite is R&amp;rsquo;s tidyverse ecosystem, and most of my work is done there.
+      <description>My name is Avery Rogers, and I&amp;rsquo;m a student at Stanford University completing my MS in computer science and BA in economics. I&amp;rsquo;m fascinated by the world of data and statistics and am actively seeking a job in data science and analytics. My favorite package suite is R&amp;rsquo;s tidyverse ecosystem, and most of my work is done there.
 When I&amp;rsquo;m not coding, I love going for night runs around the Stanford campus, getting overly competitive in team sports, and playing singing while playing amateur guitar.</description>
     </item>
     
