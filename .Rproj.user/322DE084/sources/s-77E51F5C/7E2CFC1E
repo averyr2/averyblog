@@ -3,14 +3,14 @@
     "path": "~/averyblog/config.yaml",
     "project_path": "config.yaml",
     "type": "yaml",
-    "hash": "984018195",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1616778054060.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
-        "cursorPosition": "37,13",
+        "cursorPosition": "28,18",
         "scrollLine": "19"
     },
     "folds": "",
