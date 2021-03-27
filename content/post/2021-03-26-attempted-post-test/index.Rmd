@@ -8,10 +8,10 @@ tags: []
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 # Libraries
 library(tidyverse)
 
@@ -30,7 +30,7 @@ make_decimal <- function(x, na.rm=FALSE) {
 # Code
 ```
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 current_ladders <- read_csv(current_ladders_data)
 
 current_ladders <- 
@@ -69,7 +69,7 @@ current_ladders <-
   )
 ```
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 current_ladders 
 
 current_ladders %>% 
