@@ -73,17 +73,22 @@ current_ladders <-
 current_ladders 
 
 current_ladders %>% 
+  ggplot(aes(log_gdp_pc, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
+  ggplot(aes(healthy_life_expectancy, ladder_score)) + 
+  geom_point() +
+  geom_smooth()
+
+current_ladders %>% 
   ggplot(aes(social_support, ladder_score)) + 
   geom_point() +
   geom_smooth()
 
 current_ladders %>% 
   ggplot(aes(freedom_of_choice, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
-
-current_ladders %>% 
-  ggplot(aes(log_gdp_pc, ladder_score)) + 
   geom_point() +
   geom_smooth()
 
@@ -96,6 +101,84 @@ current_ladders %>%
   ggplot(aes(perceptions_corruption, ladder_score)) + 
   geom_point() +
   geom_smooth()
+```
+
+We notice that log GDP per capita, healthy life expectancy, social support, and freedom of choice have fairly uniformly positive impacts on subjective well-being. Generosity and perceptions of corruption have less obvious relationships to subjective well-being across countries in 2020.
+
+Let us look at effects over time.
+
+```{r}
+historical_ladders <- read_csv(historical_ladders_data)
+
+historical_ladders <- 
+  historical_ladders %>% 
+  select(
+    country = `Country name`,
+    year,
+    ladder_score = `Life Ladder`,
+    log_gdp_pc = `Log GDP per capita`,
+    social_support = `Social support`,
+    healthy_life_expectancy = `Healthy life expectancy at birth`,
+    freedom_of_choice = `Freedom to make life choices`,
+    generosity = Generosity,
+    perceptions_corruption = `Perceptions of corruption`
+  ) %>% 
+  mutate_at(
+    vars(social_support, freedom_of_choice, generosity, perceptions_corruption), 
+    make_decimal
+    ) %>% 
+  mutate_at(
+    vars(
+      ladder_score, 
+      log_gdp_pc,
+      healthy_life_expectancy
+    ), 
+    divide_1000
+  )
+```
+
+```{r}
+historical_ladders
+```
+Let's see which countries got progressively better over this time period: 
+
+```{r}
+historical_ladders_change <- 
+  historical_ladders %>% 
+  group_by(country) %>% 
+  filter(year %in% c(min(year), max(year))) %>% 
+  mutate(dif_ladder = ladder_score - lag(ladder_score, default = first(ladder_score))) %>% 
+  mutate(first_year = lag(year, default = first(year))) %>% 
+  filter(year == max(year)) %>% 
+  ungroup()
+
+historical_ladders_change %>% 
+  select(country, year, first_year, dif_ladder) %>% 
+  arrange(desc(dif_ladder)) %>% 
+  top_n(10)
+
+historical_ladders_change %>% 
+  select(country, year, first_year, dif_ladder) %>% 
+  arrange(dif_ladder) %>% 
+  head(10)
+  
+```
+
+Now let's look at the regions and how they changed over this time period, on average: 
+
+```{r}
+current_ladders_region <- 
+  current_ladders %>% 
+  select(country, region)
+
+historical_ladders %>% 
+  left_join(current_ladders_region, by = "country") %>% 
+  group_by(region, year) %>% 
+  summarize(mean_ladder = mean(ladder_score)) %>% 
+  filter(!is.na(region)) %>% 
+  ggplot(aes(year, mean_ladder, color = region)) +
+  geom_point() +
+  geom_line()
 ```
 
 
