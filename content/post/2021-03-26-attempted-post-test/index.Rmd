@@ -3,8 +3,6 @@ title: World Happiness EDA
 author: Avery Rogers
 date: '2021-03-26'
 slug: attempted-post-test
-categories: []
-tags: []
 ---
 
 ```{r setup, include=FALSE}
@@ -67,6 +65,7 @@ current_ladders <-
     ), 
     divide_1000
   )
+
 ```
 
 ```{r results=FALSE, warning=FALSE, message=FALSE}
@@ -107,7 +106,7 @@ We notice that log GDP per capita, healthy life expectancy, social support, and 
 
 Let us look at effects over time.
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 historical_ladders <- read_csv(historical_ladders_data)
 
 historical_ladders <- 
@@ -137,12 +136,12 @@ historical_ladders <-
   )
 ```
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 historical_ladders
 ```
 Let's see which countries got progressively better over this time period: 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 historical_ladders_change <- 
   historical_ladders %>% 
   group_by(country) %>% 
@@ -178,7 +177,8 @@ historical_ladders %>%
   filter(!is.na(region)) %>% 
   ggplot(aes(year, mean_ladder, color = region)) +
   geom_point() +
-  geom_line()
+  geom_line() +
+  theme(legend.position="bottom")
 ```
 
 
