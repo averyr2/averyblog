@@ -19,7 +19,8 @@
       <guid>/2021/03/26/attempted-post-test/</guid>
       <description>We notice that log GDP per capita, healthy life expectancy, social support, and freedom of choice have fairly uniformly positive impacts on subjective well-being. Generosity and perceptions of corruption have less obvious relationships to subjective well-being across countries in 2020.
 Let us look at effects over time.
-## Parsed with column specification: ## cols( ## `Country name` = col_character(), ## year = col_double(), ## `Life Ladder` = col_number(), ## `Log GDP per capita` = col_number(), ## `Social support` = col_character(), ## `Healthy life expectancy at birth` = col_number(), ## `Freedom to make life choices` = col_character(), ## Generosity = col_character(), ## `Perceptions of corruption` = col_character(), ## `Positive affect` = col_character(), ## `Negative affect` = col_character() ## ) Let’s see which countries got progressively better over this time period:</description>
+Let’s see which countries got progressively better over this time period:
+Now let’s look at the regions and how they changed over this time period, on average:</description>
     </item>
     
   </channel>
