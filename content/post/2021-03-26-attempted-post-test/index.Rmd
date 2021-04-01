@@ -165,7 +165,7 @@ historical_ladders_change %>%
 
 Now let's look at the regions and how they changed over this time period, on average: 
 
-```{r}
+```{r, fig.height = 5}
 current_ladders_region <- 
   current_ladders %>% 
   select(country, region)
@@ -178,7 +178,8 @@ historical_ladders %>%
   ggplot(aes(year, mean_ladder, color = region)) +
   geom_point() +
   geom_line() +
-  theme(legend.position="bottom")
+  theme(legend.position="bottom", legend.box = "horizontal") +
+  guides(col = guide_legend(nrow = 2))
 ```
 
 
