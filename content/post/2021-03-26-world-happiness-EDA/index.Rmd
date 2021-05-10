@@ -92,7 +92,7 @@ current_ladders <-
 ```
 
 
-```{r results=FALSE, warning=FALSE, message=FALSE}
+```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
 current_ladders 
 
 current_ladders %>% 
@@ -107,14 +107,25 @@ current_ladders %>%
     y = "Happiness Ladder Score",
     title = "Wealthier Countries are Happier on Average",
     fill = "Region",
-    subtitle = "Higher log GDP per capita correlates with higher happiness ladder scores"
+    subtitle = "Higher healthy life expectancy correlates with higher happiness ladder scores"
   ) +
   guides(size = FALSE)
 
 current_ladders %>% 
+  arrange(desc(pop_2019)) %>% 
   ggplot(aes(healthy_life_expectancy, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Healthy Life Expectancy",
+    y = "Happiness Ladder Score",
+    title = "Wealthier Countries are Happier on Average",
+    fill = "Region",
+    subtitle = "Higher log GDP per capita correlates with higher happiness ladder scores"
+  ) +
+  guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(social_support, ladder_score)) + 
