@@ -5,6 +5,8 @@ date: '2021-03-26'
 slug: attempted-post-test
 ---
 
+I used the World Happiness Report for all measures related to happiness, and the World Bank 2019 population data for country populations.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
 ```
@@ -17,6 +19,7 @@ library(tidyverse)
 current_ladders_data <- "~/Downloads/world_happiness/current_ladders.csv"
 historical_ladders_data <- "~/Downloads/world_happiness/historical_ladders.csv"
 current_mortality_data <- "~/Downloads/world_happiness/current_mortality.csv"
+world_pop_data <- "~/Downloads/world_happiness/world_pop.csv"
 #===============================================================================
 divide_1000 <- function(x, na.rm=FALSE) {
   x / 1000 
@@ -66,15 +69,47 @@ current_ladders <-
     divide_1000
   )
 
+current_ladders
+
 ```
+
+```{r}
+world_pop <- 
+  read_csv(world_pop_data, skip = 4) %>% 
+  select(country = `Country Name`, pop_2019 = `2019`) 
+
+world_pop
+```
+
+```{r}
+current_ladders <- 
+  current_ladders %>% 
+  left_join(world_pop, by = "country") 
+
+current_ladders <- 
+  current_ladders %>% 
+  filter(!is.na(pop_2019))
+```
+
 
 ```{r results=FALSE, warning=FALSE, message=FALSE}
 current_ladders 
 
 current_ladders %>% 
+  arrange(desc(pop_2019)) %>% 
   ggplot(aes(log_gdp_pc, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Log GDP Per Capita",
+    y = "Happiness Ladder Score",
+    title = "Wealthier Countries are Happier on Average",
+    fill = "Region",
+    subtitle = "Higher log GDP per capita correlates with higher happiness ladder scores"
+  ) +
+  guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(healthy_life_expectancy, ladder_score)) + 
