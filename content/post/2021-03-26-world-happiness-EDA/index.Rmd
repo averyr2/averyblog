@@ -1,7 +1,10 @@
 ---
-title: World Happiness EDA
-author: Avery Rogers
+title: "World Happiness EDA"
+author: "Avery Rogers"
 date: '2021-03-26'
+output:
+  html_document:
+    df_print: paged
 slug: attempted-post-test
 ---
 
