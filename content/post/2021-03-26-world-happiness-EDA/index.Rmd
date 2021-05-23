@@ -5,7 +5,14 @@ date: '2021-03-26'
 slug: attempted-post-test
 ---
 
+**TL;DR** Wealth, social support, and life expectancy all seem to correlate strongly with happiness across countries. Generosity and corruption levels within a country do not, though data on these metrics is sparser and seems more prone to noisy and biased self-reporting. 
+
+------------------------------------------------------------------------------
+
 I used the World Happiness Report for all measures related to happiness, and the World Bank 2019 population data for country populations.
+
+World Happiness Report 2021 Data: https://www.kaggle.com/mathurinache/world-happiness-report-2021
+World Bank 2019 Data: https://data.worldbank.org/indicator/SP.POP.TOTL
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
@@ -73,12 +80,32 @@ current_ladders
 
 ```
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 world_pop <- 
   read_csv(world_pop_data, skip = 4) %>% 
   select(country = `Country Name`, pop_2019 = `2019`) 
 
-world_pop
+world_pop$country <- 
+  world_pop$country %>% 
+  # making sure names match those in Happiness database
+  recode(
+    `Congo, Rep.` = "Congo (Brazzaville)", 
+    `Egypt, Arab Rep.` = "Egypt",
+    `Gambia, The` = "Gambia",
+    `Hong Kong SAR, China` = "Hong Kong S.A.R. of China",
+    `Iran, Islamic Rep.` = "Iran",
+    `Cote d'Ivoire` = "Ivory Coast",
+    `Kyrgyz Republic` = "Kyrgyzstan",
+    `Lao PDR` = "Laos",
+    `Russian Federation` = "Russia",
+    `Slovak Republic` = "Slovakia",
+    `Korea, Rep.` = "South Korea",
+    `Eswatini` = "Swaziland",
+    `Venezuela, RB` = "Venezuela",
+    `Yemen, Rep.` = "Yemen"
+  )
+
+world_pop 
 ```
 
 ```{r}
@@ -86,20 +113,40 @@ current_ladders <-
   current_ladders %>% 
   left_join(world_pop, by = "country") 
 
-current_ladders <- 
-  current_ladders %>% 
-  filter(!is.na(pop_2019))
+current_ladders %>% 
+  arrange(country)
+```
+
+Unfortunately, North Cyprus, Palestinian Territories, and Taiwan do not exist in the World Bank Data, so we will leave them out of our analysis. 
+
+I'm not super satisfied with the regional breakdown provided by the Happiness records, since there are too many for my taste. At the risk of losing granularity, I am going to combine some of the regions. 
+
+```{r}
+current_ladders$region <- 
+  current_ladders$region %>% 
+  recode(
+    `Western Europe` = "Europe", 
+    `Central and Eastern Europe` = "Europe",
+    `East Asia` = "Asia",
+    `Southeast Asia` = "Asia"
+  )
+
+
+
+current_ladders %>% 
+  filter(is.na(region))
 ```
 
 
 ```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
-current_ladders 
+
 
 current_ladders %>% 
   arrange(desc(pop_2019)) %>% 
   ggplot(aes(log_gdp_pc, ladder_score)) + 
   geom_smooth() +
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
   scale_radius(range = c(2, 16)) +
   scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
   labs(
@@ -107,7 +154,7 @@ current_ladders %>%
     y = "Happiness Ladder Score",
     title = "Wealthier Countries are Happier on Average",
     fill = "Region",
-    subtitle = "Higher healthy life expectancy correlates with higher happiness ladder scores"
+    subtitle = "Higher healthy life expectancy correlates with higher happiness scores"
   ) +
   guides(size = FALSE)
 
@@ -116,6 +163,7 @@ current_ladders %>%
   ggplot(aes(healthy_life_expectancy, ladder_score)) + 
   geom_smooth() +
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
   scale_radius(range = c(2, 16)) +
   scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
   labs(
@@ -123,29 +171,73 @@ current_ladders %>%
     y = "Happiness Ladder Score",
     title = "Wealthier Countries are Happier on Average",
     fill = "Region",
-    subtitle = "Higher log GDP per capita correlates with higher happiness ladder scores"
+    subtitle = "Higher log GDP per capita correlates with higher happiness scores"
   ) +
   guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(social_support, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Social Support (Self Reported)",
+    y = "Happiness Ladder Score",
+    title = "More Socially Supportive Countries Countries are Happier on Average",
+    fill = "Region",
+    subtitle = "Self-reported levels of social support correlate with higher happiness scores"
+  ) +
+  guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(freedom_of_choice, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() + 
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Freedom of Choice (Self-Reported)",
+    y = "Happiness Ladder Score",
+    title = "Countries That Afford Personal Freedoms are Happier on Average",
+    fill = "Region",
+    subtitle = "Higher self-reported freedom of choice correlates with higher happiness scores"
+  ) +
+  guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(generosity, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Generosity (Self Reported)",
+    y = "Happiness Ladder Score",
+    title = "More Generous Countries are No Happier on Average",
+    fill = "Region",
+    subtitle = "Nationwide generosity levels do not correlate with higher happiness scores"
+  ) +
+  guides(size = FALSE)
 
 current_ladders %>% 
   ggplot(aes(perceptions_corruption, ladder_score)) + 
-  geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  geom_point(aes(fill = region, size = pop_2019), pch = 21) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  scale_radius(range = c(2, 16)) +
+  scale_y_continuous(breaks = c(3, 4, 5, 6, 7, 8)) +
+  labs(
+    x = "Perceptions of Corruption",
+    y = "Happiness Ladder Score",
+    title = "More Corrupt Countries are No Less Happy on Average",
+    fill = "Region",
+    subtitle = "Perceived correuption does not correlate with higher happiness scores"
+  ) +
+  guides(size = FALSE)
 ```
 
 We notice that log GDP per capita, healthy life expectancy, social support, and freedom of choice have fairly uniformly positive impacts on subjective well-being. Generosity and perceptions of corruption have less obvious relationships to subjective well-being across countries in 2020.
@@ -211,7 +303,7 @@ historical_ladders_change %>%
 
 Now let's look at the regions and how they changed over this time period, on average: 
 
-```{r, fig.height = 5}
+```{r, fig.width = 7, fig.height = 5}
 current_ladders_region <- 
   current_ladders %>% 
   select(country, region)
