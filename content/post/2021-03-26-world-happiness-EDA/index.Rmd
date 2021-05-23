@@ -206,6 +206,7 @@ We see a similar curve for healthy life expectancy as we do for per capita GDP: 
 
 ```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
 current_ladders %>% 
+  arrange(desc(pop_2019)) %>%
   ggplot(aes(social_support, ladder_score)) + 
   geom_smooth() +
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
@@ -270,6 +271,7 @@ The country with the least social support on our graph is Afghanistan, with an a
 ```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
 current_ladders %>% 
   filter(country != "Afghanistan") %>% 
+  arrange(desc(pop_2019)) %>%
   ggplot(aes(freedom_of_choice, ladder_score)) + 
   geom_smooth() + 
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
@@ -330,6 +332,7 @@ current_ladders %>%
 
 ```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
 current_ladders %>% 
+  arrange(desc(pop_2019)) %>%
   ggplot(aes(generosity, ladder_score)) + 
   geom_smooth() +
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
@@ -395,6 +398,7 @@ I have no particular explanation for this, but I'd be curious to find one!
 ```{r results=FALSE, warning=FALSE, message=FALSE, width = 6}
 current_ladders %>% 
   filter(country != "Rwanda") %>% 
+  arrange(desc(pop_2019)) %>%
   ggplot(aes(perceptions_corruption, ladder_score)) + 
   geom_smooth() +
   geom_point(aes(fill = region, size = pop_2019), pch = 21) +
@@ -404,6 +408,30 @@ current_ladders %>%
     breaks = c(3, 4, 5, 6, 7, 8), 
     limits = c(2.3, 8), 
     expand = c(0,0)
+  ) +
+  geom_segment(
+    aes(x = 0.6, y = 2.5, xend = 0.76, yend = 2.5), 
+    arrow = arrow(length = unit(0.15, "cm"), type = "closed") 
+  ) + 
+  annotate(
+    "text", 
+    label = "More Corrupt", 
+    x = 0.68, 
+    y = 2.8, 
+    size = 3, 
+    colour = "black"
+  ) +
+  geom_segment(
+    aes(x = 0.4, y = 2.5, xend = 0.24, yend = 2.5), 
+    arrow = arrow(length = unit(0.15, "cm"), type = "closed") 
+  ) + 
+  annotate(
+    "text", 
+    label = "Less Corrupt", 
+    x = 0.33, 
+    y = 2.8, 
+    size = 3, 
+    colour = "black"
   ) +
   labs(
     x = "Perceptions of Corruption",
