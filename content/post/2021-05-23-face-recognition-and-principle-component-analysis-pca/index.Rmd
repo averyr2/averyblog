@@ -9,6 +9,7 @@ tags: []
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
+knitr::include_graphics
 ```
 
 ```{r results=FALSE, warning=FALSE, message=FALSE}
