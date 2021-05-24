@@ -5,7 +5,7 @@ date: '2021-03-26'
 output:
   html_document:
     df_print: paged
-slug: attempted-post-test
+slug: world-happiness-eda
 ---
 
 **TL;DR** Wealth, social support, and life expectancy all seem to correlate strongly with happiness across countries. Corruption appears to correlate negatively with happiness, though outliers exist. Generosity does not seem to correlate with happiness at all, though the proxy for generosity (donating to a charity within the last month) seems ill-adapted to capture the kinds of informal help offered between members of distinct communities that dominate poorer and politically fragile countries. 

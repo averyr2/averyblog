@@ -1,0 +1,42 @@
+---
+title: Face Recognition and Single Value Decomposition (SVD)
+author: Avery Rogers
+date: '2021-05-23'
+slug: face-recognition-and-svd
+categories: []
+tags: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
+```
+
+```{r results=FALSE, warning=FALSE, message=FALSE}
+# Libraries
+library(tidyverse)
+
+# Parameters
+current_ladders_data <- "~/Downloads/world_happiness/current_ladders.csv"
+historical_ladders_data <- "~/Downloads/world_happiness/historical_ladders.csv"
+current_mortality_data <- "~/Downloads/world_happiness/current_mortality.csv"
+world_pop_data <- "~/Downloads/world_happiness/world_pop.csv"
+#===============================================================================
+
+# Generic functions for data parsing
+divide_1000 <- function(x, na.rm=FALSE) {
+  x / 1000 
+}
+
+make_decimal <- function(x, na.rm=FALSE) {
+  as.integer(str_sub(x, 3, -1)) / 1000 
+}
+
+```
+
+For this project, I investigate how much I can reduce the storage space needed to store a black-and-white photo of my face still have Apple's facial recognition system recognize me! I will be using Single Value Decomposition to reduce a photo to a lower-rank matrix of grey pixel values that can be stored in a fraction of the space as the original photo.
+
+![Original image.](~/python_averyblog/Output Files/original_image.png)
+In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values. This is because SVD's computations are achievable over a 2x2 matrix, but solving SVD on a tensor (3 dimensional matrix) is NP-hard.
+
+![2x2 matrix image representation, unnormalized.](~/python_averyblog/Output Files/bw_image.png)
+
