@@ -17,8 +17,8 @@
       <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
       
       <guid>/2021/05/23/face-recognition-and-svd/</guid>
-      <description>For this project, I investigate how much I can reduce the storage space needed to store a black-and-white photo of my face still have Apple’s facial recognition system recognize me! I will be using Single Value Decomposition to reduce a photo to a lower-rank matrix of grey pixel values that can be stored in a fraction of the space as the original photo.
-In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values.</description>
+      <description>TL;DR I use Single Value Decomposition (SVD) to approximate photos of my own face and check if Apple’s Photos app can still recognize my face at low rank levels. I find that the Photo app can recognize my face at rank 25, a 98% decrease in storage size from the original image. I hypothesize that SVD works particularly well on faces because of facial symmetry.
+*Code for this project can be found on Github right here.</description>
     </item>
     
     <item>

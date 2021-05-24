@@ -13,10 +13,16 @@ tags: []
 <p>*Code for this project can be found on Github <a href="https://github.com/averyr2/python_averyblog/blob/main/SVD%20Avery&#39;s%20Face.ipynb">right here.</a></p>
 <hr />
 <p>For this project, I investigate how much I can reduce the storage space needed to store a black-and-white photo of my face still have Apple’s facial recognition system recognize me! I will be using Single Value Decomposition to reduce a photo to a lower-rank matrix of grey pixel values that can be stored in a fraction of the space as the original photo.</p>
-<p><img src="/Users/averyrogers/python_averyblog/Output%20Files/original_image.png" alt="Original image." />
-In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values. This is because SVD’s computations are achievable over a 2x2 matrix, but solving SVD on a tensor (3 dimensional matrix) is NP-hard.</p>
-<p><img src="/Users/averyrogers/python_averyblog/Output%20Files/bw_image.png" alt="2x2 matrix image representation, unprocessed." />
-Now that the image has been pre-processed, I will run SVD on my (width x height) matrix of single pixel values. SVD is a strategy for apprimxating a matrix using a lower rank in a few steps:</p>
+<div class="figure">
+<img src="images/original_image.png" alt="" />
+<p class="caption">Original image</p>
+</div>
+<p>In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values. This is because SVD’s computations are achievable over a 2x2 matrix, but solving SVD on a tensor (3 dimensional matrix) is NP-hard.</p>
+<div class="figure">
+<img src="images/bw_image.png" alt="" />
+<p class="caption">2x2 matrix representation, unprocessed.</p>
+</div>
+<p>Now that the image has been pre-processed, I will run SVD on my (width x height) matrix of single pixel values. SVD is a strategy for apprimxating a matrix using a lower rank in a few steps:</p>
 <ol style="list-style-type: decimal">
 <li>If a matrix has 500 rows and 400 columns, we can use SVD to decompose that matrix into a matrix multiplication between three matrices: <code>u</code> of dimensions (500 x 500), <code>s</code> of dimensions (width x height), and <code>vh</code> of dimensions (height X height).</li>
 <li>Say we want to approximate our original matrix using a matrix of rank 10. We will then multiply the first 10 columns of <code>u</code> with the 10th diagonal of <code>s</code> and the first 10 rows of <code>vh</code>.</li>
@@ -24,23 +30,32 @@ Now that the image has been pre-processed, I will run SVD on my (width x height)
 <p>This reduces our storage space very significantly - from <span class="math inline">\(500 \times 400 = 200,000\)</span> values for the original (500 x 400) matrix to one of <span class="math inline">\((500 \times 10) + (400 \times 1) + (400 \times 10) = 9,400\)</span> values, a 95% decrease in size.</p>
 <p>I will run SVD with rank sizes 10, 25, 50, 100, 200, 500, and 1000 to see approximately what rank image is still facially recognizable to Apple’s Photo app.</p>
 <div class="figure">
-<img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_10.png" alt="" />
-<p class="caption">Rank 10 matrix.</p>
+<img src="images/image_rank_10.png" alt="" />
+<p class="caption">Rank 10 matrix image.</p>
 </div>
 <div class="figure">
-<img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_25.png" alt="" />
-<p class="caption">Rank 25 matrix.</p>
+<img src="images/image_rank_25.png" alt="" />
+<p class="caption">Rank 25 matrix image.</p>
 </div>
 <div class="figure">
-<img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_50.png" alt="" />
-<p class="caption">Rank 50 matrix.</p>
+<img src="images/image_rank_50%20copy.png" alt="" />
+<p class="caption">Rank 50 matrix image.</p>
 </div>
-<p><img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_100.png" alt="Rank 100 matrix." />
-<img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_200.png" alt="Rank 200 matrix." /></p>
 <div class="figure">
-<img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_500.png" alt="" />
-<p class="caption">Rank 500 matrix.</p>
+<img src="images/image_rank_100.png" alt="" />
+<p class="caption">Rank 100 matrix image.</p>
 </div>
-<p><img src="/Users/averyrogers/python_averyblog/Output%20Files/image_rank_1000.png" alt="Rank 1000 matrix." />
-Low-rank matrices look surprisingly similar to my full-rank face image, and Apple’s Photo app bears this out: it is able to recognize my face at rank 25, going from <span class="math inline">\(1376 \times 1026 = 1,411,776\)</span> values to only <span class="math inline">\((1376 \times 10) + (1026 \times 1) + (1026 \times 10) = 25046\)</span> values, a whopping 98.3% decrease in storage space.</p>
+<div class="figure">
+<img src="images/image_rank_200.png" alt="" />
+<p class="caption">Rank 200 matrix image.</p>
+</div>
+<div class="figure">
+<img src="images/image_rank_500.png" alt="" />
+<p class="caption">Rank 500 matrix image.</p>
+</div>
+<div class="figure">
+<img src="images/image_rank_1000.png" alt="" />
+<p class="caption">Rank 1000 matrix image.</p>
+</div>
+<p>Low-rank matrices look surprisingly similar to my full-rank face image, and Apple’s Photo app bears this out: it is able to recognize my face at rank 25, going from <span class="math inline">\(1376 \times 1026 = 1,411,776\)</span> values to only <span class="math inline">\((1376 \times 10) + (1026 \times 1) + (1026 \times 10) = 25046\)</span> values, a whopping 98.3% decrease in storage space.</p>
 <p>I hypothesize that SVD works so well at low rank on faces because faces are very symmetric compared to other image types. Because SVD seeks to build the optimal linear combination of vectors to approximate the original image, a highly symmetrical image will be easier to approximate with less possible vector types!</p>
