@@ -57,7 +57,7 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">6 min read</span>
     
 
     <h1 class="article-title">World Happiness EDA</h1>
@@ -70,19 +70,44 @@
       
 
 
-<p><strong>TL;DR</strong> Wealth, social support, and life expectancy all seem to correlate strongly with happiness across countries. Generosity and corruption levels within a country do not, though data on these metrics is sparser and seems more prone to noisy and biased self-reporting.</p>
+<p><strong>TL;DR</strong> Wealth, social support, and life expectancy all seem to correlate strongly with happiness across countries. Corruption appears to correlate negatively with happiness, though outliers exist. Generosity does not seem to correlate with happiness at all, though the proxy for generosity (donating to a charity within the last month) seems ill-adapted to capture the kinds of informal help offered between members of distinct communities that dominate poorer and politically fragile countries.</p>
+<p>*Code can be found on Github <a href="https://github.com/averyr2/r_averyblog/blob/master/content/post/2021-03-26-world-happiness-EDA/index.Rmd">right here.</a></p>
 <hr />
-<p>I used the World Happiness Report for all measures related to happiness, and the World Bank 2019 population data for country populations.</p>
-<p>World Happiness Report 2021 Data: <a href="https://www.kaggle.com/mathurinache/world-happiness-report-2021" class="uri">https://www.kaggle.com/mathurinache/world-happiness-report-2021</a>
-World Bank 2019 Data: <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" class="uri">https://data.worldbank.org/indicator/SP.POP.TOTL</a></p>
-<p>Unfortunately, North Cyprus, Palestinian Territories, and Taiwan do not exist in the World Bank Data, so we will leave them out of our analysis.</p>
-<p>I’m not super satisfied with the regional breakdown provided by the Happiness records, since there are too many for my taste. At the risk of losing granularity, I am going to combine some of the regions.</p>
-<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-2.png" width="672" /><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-3.png" width="672" /><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-4.png" width="672" /><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-5.png" width="672" /><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-6.png" width="672" /></p>
-<p>We notice that log GDP per capita, healthy life expectancy, social support, and freedom of choice have fairly uniformly positive impacts on subjective well-being. Generosity and perceptions of corruption have less obvious relationships to subjective well-being across countries in 2020.</p>
-<p>Let us look at effects over time.</p>
-<p>Let’s see which countries got progressively better over this time period:</p>
-<p>Now let’s look at the regions and how they changed over this time period, on average:</p>
-<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Today, I will use Exploratory Data Analysis (EDA) using R’s <code>dplyr</code> and <code>ggplot2</code> package suites to investigate the correlates of happiness across countries. I used the World Happiness Report for all measures related to happiness, and the World Bank 2019 population data for country populations.</p>
+<p><em>Links to datasets</em>:
+<a href="https://www.kaggle.com/mathurinache/world-happiness-report-2021">World Happiness Report 2021 Data</a>,
+<a href="https://data.worldbank.org/indicator/SP.POP.TOTL">World Bank 2019 Data</a></p>
+<p>After cleaning and merging the data, I plotted per capita GDP, life expectancy, social support, generosity, and corruption as they relate to happiness. (Note that all smooth curves are calculated using local polynomial regression, and that they are weighted equally by country and not by population.)</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>As we can see in the plot above, happiness seems to increase pretty steadily with per capita GDP. We also notice, unsurprisingly, strong regional patterns: Europe and North America come out with both high per capita GDP and happiness scores, while many sub-Saharan African countries come out with low per capita GDP and happiness scores. India is interestingly below our smooth curve, indicating that it is less happy than its per capita GDP peers, at least according to the dataset I’ve used.</p>
+<p>On a cute sidenote, that yellow dot that’s well above the rest of Latin America and the Caribbean is Costa Rica. I traveled there as a teenager and it was indeed one of the most beautiful, laid back, and positive places I’ve ever been. I’m glad that wasn’t just a naïve impression, at least according to the data on hand!</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>We see a similar curve for healthy life expectancy as we do for per capita GDP: countries with longer healthy life expectancies are happier on average. (Note that healthy life expectancy means life expectancy adjusted for the suffering brought upon by significant disease and disability). Interestingly here, we see large parts of Europe falling well above the curve compared to their Asian counterparts with similar life expectancies, indicating that other geographically-relevant cultural patterns are at play in differentiating the happiness of those countries with high health.</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>In the World Happiness Survey, social support is quantified by a binary variable corresponding to the following question: “If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them, or not?”. The average score is obtained for each country between 0 (no social support) and 1 (high social support). We see here that many countries in Europe, North America and ANZ, Latin America and the Caribbean, and Asia report very high levels of social support. India is an interesting outlier in our diagram with very low reported levels of social support; it would be an interesting extension of this work to try and understand the factors influencing social connectedness in India.</p>
+<p>The country with the least social support on our graph is Afghanistan, with an average social support score of only .463. Neighboring Pakistan has a social support level of .651, which is higher than India at .603.</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Like social support, the freedom of choice metric is a national average over the binary question: “Are you satisfied or dissatisfied with your freedom to choose what you do with your life?”.</p>
+<p>For this part, I actually had to remove Afghanistan because its freedom of choice score was so low - less than 0.4 - that it threw of the local regression curve. It’s not a great time to be Afghani, unfortunately.</p>
+<p>Otherwise, we see a gentle but noisy increase in happiness as freedom of choice expands for people. There does not seem to be as much geographic clustering for freedom of choice as there was for the other metrics we’ve looked at. Within Europe, for example, Norway has the highest freedom of choice score of 0.96, while Greece comes in last with a score of 0.562. That seems somewhat unsurprising given the poor financial and employment outcomes in Greece compared to its Northern and Western European counterparts.</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>We now turn to a variable that does not seem to have much to do with happiness across countries: generosity. In the World Happiness Report, generosity is a national average across the binary question: “Have you donated money to a charity in the past month?”.</p>
+<p>We see fewer country responses with the majority of countries having a score below 0.2. As such, this seems like a poor metric for generosity if all countries are clustered in a narrow band near 0.</p>
+<p>The top 5 countries for generosity are fascinating:</p>
+<ol style="list-style-type: decimal">
+<li>Indonesia, with a score of 0.542.</li>
+<li>Myanmar, with a score of 0.509.</li>
+<li>Gambia, with a score of 0.424.</li>
+<li>Haiti, with a score of 0.422.</li>
+<li>Uzbekistan, with a score of 0.311.</li>
+</ol>
+<p>I have no particular explanation for this, but I’d be curious to find one!</p>
+<p><img src="/2021/03/26/attempted-post-test/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Finally, we have corruption. Corruption is measured using two questions in the World Happiness Survey: “Is corruption widespread throughout the government or not?” and “Is corruption widespread within businesses or not?”. The answers are averaged by person and a national average is taken over the answers.</p>
+<p>Here, corruption is greater on the righthand side of the graph. We have one extreme outlier, Rwanda, which has a low ladder score of 3.415 but also a very low perception of corruption, 0.167. I removed Rwanda for the sake of seeing how our local regression curve looks without this outlier. Once Rwanda has been removed, we see that countries with lower corruption scores (mostly in Europe and North America/ANZ) tend to be happier. We also notice that our geographic segmentation is back, with sub-Saharan African countries reporting high corruption (other than Rwanda!) and low happiness while European countries with high corruption are generally pretty happy.</p>
+<p>The least corrupt country here is Singapore, with a perceptions of corruption score of only 0.082. I suppose all those strict rules create a strong social fabric of trust!</p>
+<hr />
+<p>All in all, we see that wealth, healthy long lives, and social support are strong correlates of happiness (not too surprising!) and that corruption is inversely correlated with happiness. While this particular dataset offers no conclusions about generosity and happiness, I imagine a more robust measure of generosity beyond the current binary question would reveal interesting results.</p>
 
     </div>
   </article>
