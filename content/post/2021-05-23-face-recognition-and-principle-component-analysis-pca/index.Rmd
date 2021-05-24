@@ -39,5 +39,5 @@ For this project, I investigate how much I can reduce the storage space needed t
 ![Original image.](~/python_averyblog/Output Files/original_image.png)
 In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values. This is because SVD's computations are achievable over a 2x2 matrix, but solving SVD on a tensor (3 dimensional matrix) is NP-hard.
 
-![2x2 matrix image representation, unnormalized.](~/python_averyblog/Output Files/bw_image.png)
+![2x2 matrix image representation, unprocessed.](~/python_averyblog/Output Files/bw_image.png)
 

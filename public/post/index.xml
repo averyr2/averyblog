@@ -6,17 +6,27 @@
     <description>Recent content in Posts on Avery&#39;s Data Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Face Recognition and Single Value Decomposition (SVD)</title>
+      <link>/2021/05/23/face-recognition-and-svd/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/23/face-recognition-and-svd/</guid>
+      <description>For this project, I investigate how much I can reduce the storage space needed to store a black-and-white photo of my face still have Apple’s facial recognition system recognize me! I will be using Single Value Decomposition to reduce a photo to a lower-rank matrix of grey pixel values that can be stored in a fraction of the space as the original photo.
+In order to process this image using Single Value Decomposition (SVD), I need to make it black and white by setting each pixel value to the average over its RGB values.</description>
+    </item>
+    
+    <item>
       <title>World Happiness EDA</title>
-      <link>/2021/03/26/attempted-post-test/</link>
+      <link>/2021/03/26/world-happiness-eda/</link>
       <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>/2021/03/26/attempted-post-test/</guid>
+      <guid>/2021/03/26/world-happiness-eda/</guid>
       <description>TL;DR Wealth, social support, and life expectancy all seem to correlate strongly with happiness across countries. Corruption appears to correlate negatively with happiness, though outliers exist. Generosity does not seem to correlate with happiness at all, though the proxy for generosity (donating to a charity within the last month) seems ill-adapted to capture the kinds of informal help offered between members of distinct communities that dominate poorer and politically fragile countries.</description>
     </item>
     
