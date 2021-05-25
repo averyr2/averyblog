@@ -165,7 +165,7 @@ current_ladders %>%
     y = "Happiness Ladder Score",
     title = "Wealthier Countries are Happier on Average",
     fill = "Region",
-    subtitle = "Higher healthy life expectancy correlates with higher happiness scores"
+    subtitle = "Higher GDP per capita correlates with higher happiness scores"
   ) +
   guides(size = FALSE)
 ``` 
@@ -205,7 +205,7 @@ current_ladders %>%
   labs(
     x = "Healthy Life Expectancy",
     y = "Happiness Ladder Score",
-    title = "Countries with Higher Healthy Lifespans are Happier on Average",
+    title = "Healthier Countries are Happier on Average",
     fill = "Region",
     subtitle = "Higher healthy life expectancy correlates with higher happiness scores"
   ) +
@@ -258,9 +258,9 @@ current_ladders %>%
   geom_segment(aes(x = 0.7, y = 5.85, xend = 0.8, yend = 5.5), size= 0.1) +
   annotate("text", label = "India", x = 0.655, y = 3.6) +
   labs(
-    x = "Social Support (Self Reported)",
+    x = "Social Support (Self-Reported)",
     y = "Happiness Ladder Score",
-    title = "More Socially Supportive Countries Countries are Happier on Average",
+    title = "More Socially Supportive Countries are Happier on Average",
     fill = "Region",
     subtitle = "Self-reported levels of social support correlate with higher happiness scores"
   ) +
@@ -325,7 +325,7 @@ current_ladders %>%
   labs(
     x = "Freedom of Choice (Self-Reported)",
     y = "Happiness Ladder Score",
-    title = "Countries That Afford Personal Freedoms are Happier on Average",
+    title = "Countries with more Personal Freedoms are Happier on Average",
     fill = "Region",
     subtitle = "Higher self-reported freedom of choice correlates with higher happiness scores"
   ) +
@@ -387,7 +387,7 @@ current_ladders %>%
   geom_segment(aes(x = 0.13, y = 7.8, xend = 0.1, yend = 6.95), size= 0.1) +
   annotate("text", label = "India", x = 0.145, y = 4.1) +
   labs(
-    x = "Generosity (Self Reported)",
+    x = "Generosity (Self-Reported)",
     y = "Happiness Ladder Score",
     title = "More Generous Countries are No Happier on Average",
     fill = "Region",
@@ -463,7 +463,7 @@ current_ladders %>%
   annotate("text", label = "India", x = 0.93, y = 4.1) +
   geom_segment(aes(x = 0.93, y = 3.95, xend = 0.77, yend = 3.8), size= 0.1) +
   labs(
-    x = "Perceptions of Corruption",
+    x = "Perceptions of Corruption (Self-Reported)",
     y = "Happiness Ladder Score",
     title = "More Corrupt Countries are Less Happy on Average",
     fill = "Region",
