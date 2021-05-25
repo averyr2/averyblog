@@ -481,7 +481,7 @@ current_ladders %>%
   select(country, ladder_score, perceptions_corruption)
 ```
 
-Here, corruption is greater on the righthand side of the graph. We have one extreme outlier, Rwanda, which has a low ladder score of 3.415 but also a very low perception of corruption, 0.167. I removed Rwanda for the sake of seeing how our local regression curve looks without this outlier. Once Rwanda has been removed, we see that countries with lower corruption scores (mostly in Europe and North America/ANZ) tend to be happier. We also notice that our geographic segmentation is back, with sub-Saharan African countries reporting high corruption (other than Rwanda!) and low happiness while European countries with high corruption are generally pretty happy. 
+Here, perceived corruption is greater on the righthand side of the graph. We have one extreme outlier, Rwanda, which has a low ladder score of 3.415 but also a very low perception of corruption, 0.167. I removed Rwanda for the sake of seeing how our local regression curve looks without this outlier. Once Rwanda has been removed, we see that countries with lower corruption scores (mostly in Europe and North America/ANZ) tend to be happier. We also notice that our geographic segmentation is back, with sub-Saharan African countries reporting high corruption (other than Rwanda!) and low happiness while European countries with high corruption are generally pretty happy. 
 
 ```{r}
 current_ladders %>% 
@@ -490,7 +490,7 @@ current_ladders %>%
 ```
 
 
-The least corrupt country here is Singapore, with a perceptions of corruption score of only 0.082. I suppose all those strict rules create a strong social fabric of trust! 
+The country with the least perceived corruption is Singapore, with a perceptions of corruption score of only 0.082. I suppose all those strict rules create a strong social fabric of trust! 
 
 ----------------------------------
 
