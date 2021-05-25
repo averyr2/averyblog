@@ -31,8 +31,11 @@ This reduces our storage space very significantly - from $500 \times 400 = 200,0
 
 I will run SVD with rank sizes 10, 25, 50, 100, 200, and 500 to see approximately what rank image is still facially recognizable to Apple's Photo app. 
 
+*Rank 10, 25, 50 images:*
 
 ![Rank 10 matrix image.](images/image_rank_10.png){width=220} ![Rank 25 matrix image.](images/image_rank_25.png){width=220} ![](images/image_rank_50.png){width=220px}
+
+*Rank 100, 200, 500 images:*
 
 ![Rank 100 matrix image.](images/image_rank_200.png){width=220} ![Rank 200 matrix image.](images/image_rank_200.png){width=220} ![Rank 500 matrix image.](images/image_rank_500.png){width=220}
 

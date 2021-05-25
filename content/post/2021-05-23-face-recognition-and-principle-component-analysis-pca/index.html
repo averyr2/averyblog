@@ -29,7 +29,9 @@ tags: []
 </ol>
 <p>This reduces our storage space very significantly - from <span class="math inline">\(500 \times 400 = 200,000\)</span> values for the original (500 x 400) matrix to one of <span class="math inline">\((500 \times 10) + (400 \times 1) + (400 \times 10) = 9,400\)</span> values, a 95% decrease in size.</p>
 <p>I will run SVD with rank sizes 10, 25, 50, 100, 200, and 500 to see approximately what rank image is still facially recognizable to Apple’s Photo app.</p>
+<p><em>Rank 10, 25, 50 images:</em></p>
 <p><img src="images/image_rank_10.png" width="220" alt="Rank 10 matrix image." /> <img src="images/image_rank_25.png" width="220" alt="Rank 25 matrix image." /> <img src="images/image_rank_50.png" width="220" /></p>
+<p><em>Rank 100, 200, 500 images:</em></p>
 <p><img src="images/image_rank_200.png" width="220" alt="Rank 100 matrix image." /> <img src="images/image_rank_200.png" width="220" alt="Rank 200 matrix image." /> <img src="images/image_rank_500.png" width="220" alt="Rank 500 matrix image." /></p>
 <p>Low-rank matrices look surprisingly similar to my full-rank face image, and Apple’s Photo app bears this out: it is able to recognize my face at rank 25, going from <span class="math inline">\(1376 \times 1026 = 1,411,776\)</span> values to only <span class="math inline">\((1376 \times 10) + (1026 \times 1) + (1026 \times 10) = 25,046\)</span> values, a whopping 98.3% decrease in storage space.</p>
 <p>I hypothesize that SVD works so well at low rank on faces because faces are very symmetric compared to other image types. Because SVD seeks to build the optimal linear combination of vectors to approximate the original image, a highly symmetrical image will be easier to approximate with less possible vector types!</p>
