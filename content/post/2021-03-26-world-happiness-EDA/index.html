@@ -32,7 +32,7 @@ slug: world-happiness-eda
 <p>Otherwise, we see a gentle but noisy increase in happiness as freedom of choice expands for people. There does not seem to be as much geographic clustering for freedom of choice as there was for the other metrics we’ve looked at. Within Europe, for example, Norway has the highest freedom of choice score of 0.96, while Greece comes in last with a score of 0.562. That seems somewhat unsurprising given the poor financial and employment outcomes in Greece compared to its Northern and Western European counterparts.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>We now turn to a variable that does not seem to have much to do with happiness across countries: generosity. In the World Happiness Report, generosity is a national average across the binary question: “Have you donated money to a charity in the past month?”.</p>
-<p>We see fewer country responses with the majority of countries having a score below 0.2. As such, this seems like a poor metric for generosity if all countries are clustered in a narrow band near 0.</p>
+<p>We see fewer country responses with the majority of countries having a score below 0.2. As such, this seems like a poor metric for evaluating differential generosity if all countries are clustered in a narrow band near 0. It also seems like a poor metric because it does not get at the heart of interpersonal generosity that dominates many communities in an informal manner.</p>
 <p>The top 5 countries for generosity are fascinating:</p>
 <ol style="list-style-type: decimal">
 <li>Indonesia, with a score of 0.542.</li>
@@ -43,7 +43,7 @@ slug: world-happiness-eda
 </ol>
 <p>I have no particular explanation for this, but I’d be curious to find one!</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p>Finally, we have corruption. Corruption is measured using two questions in the World Happiness Survey: “Is corruption widespread throughout the government or not?” and “Is corruption widespread within businesses or not?”. The answers are averaged by person and a national average is taken over the answers.</p>
+<p>Finally, we have perceptions of corruption. Perceptions of corruption are measured using two questions in the World Happiness Survey: “Is corruption widespread throughout the government or not?” and “Is corruption widespread within businesses or not?”. The answers are averaged by person and a national average is taken over the answers. (Note that these scores do not necessarily reflect actual corruption, which, by definition, is unmeasurable unless it is caught).</p>
 <p>Here, corruption is greater on the righthand side of the graph. We have one extreme outlier, Rwanda, which has a low ladder score of 3.415 but also a very low perception of corruption, 0.167. I removed Rwanda for the sake of seeing how our local regression curve looks without this outlier. Once Rwanda has been removed, we see that countries with lower corruption scores (mostly in Europe and North America/ANZ) tend to be happier. We also notice that our geographic segmentation is back, with sub-Saharan African countries reporting high corruption (other than Rwanda!) and low happiness while European countries with high corruption are generally pretty happy.</p>
 <p>The least corrupt country here is Singapore, with a perceptions of corruption score of only 0.082. I suppose all those strict rules create a strong social fabric of trust!</p>
 <hr />

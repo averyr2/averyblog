@@ -398,7 +398,7 @@ current_ladders %>%
 
 We now turn to a variable that does not seem to have much to do with happiness across countries: generosity. In the World Happiness Report, generosity is a national average across the binary question: "Have you donated money to a charity in the past month?". 
 
-We see fewer country responses with the majority of countries having a score below 0.2. As such, this seems like a poor metric for generosity if all countries are clustered in a narrow band near 0. 
+We see fewer country responses with the majority of countries having a score below 0.2. As such, this seems like a poor metric for evaluating differential generosity if all countries are clustered in a narrow band near 0. It also seems like a poor metric because it does not get at the heart of interpersonal generosity that dominates many communities in an informal manner. 
 
 ```{r}
 current_ladders %>% 
@@ -472,7 +472,7 @@ current_ladders %>%
   guides(size = FALSE)
 ```
 
-Finally, we have corruption. Corruption is measured using two questions in the World Happiness Survey: "Is corruption widespread throughout the government or not?" and "Is corruption widespread within businesses or not?". The answers are averaged by person and a national average is taken over the answers.  
+Finally, we have perceptions of corruption. Perceptions of corruption are measured using two questions in the World Happiness Survey: "Is corruption widespread throughout the government or not?" and "Is corruption widespread within businesses or not?". The answers are averaged by person and a national average is taken over the answers. (Note that these scores do not necessarily reflect actual corruption, which, by definition, is unmeasurable unless it is caught). 
 
 ```{r}
 current_ladders %>% 
