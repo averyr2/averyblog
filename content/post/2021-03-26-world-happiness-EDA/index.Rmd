@@ -29,6 +29,7 @@ knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
 ```{r results=FALSE, warning=FALSE, message=FALSE}
 # Libraries
 library(tidyverse)
+library(ggrepel)
 
 # Parameters
 current_ladders_data <- "~/Downloads/world_happiness/current_ladders.csv"
@@ -135,7 +136,8 @@ current_ladders$region <-
     `Central and Eastern Europe` = "Europe",
     `East Asia` = "Asia",
     `Southeast Asia` = "Asia",
-    `Commonwealth of Independent States` = "Commonwealth of\nIndependent States"
+    `Commonwealth of Independent States` = "Commonwealth of\nIndependent States",
+    `North America and ANZ` = "North America, Australia,\nand New Zealand"
   )
 ```
 
@@ -153,6 +155,11 @@ current_ladders %>%
     breaks = c(3, 4, 5, 6, 7, 8), 
     expand = c(0, 0)
   ) +
+  annotate("text", label = "United States", x = 10, y = 7.75) +
+  geom_segment(aes(x = 10, y = 7.55, xend = 11.05, yend = 6.95), size= 0.1) +
+  annotate("text", label = "China", x = 10.5, y = 4.45) +
+  geom_segment(aes(x = 10.5, y = 4.6, xend = 9.8, yend = 5.35), size= 0.1) +
+  annotate("text", label = "India", x = 8.9, y = 3.2) +
   labs(
     x = "Log GDP Per Capita",
     y = "Happiness Ladder Score",
@@ -192,6 +199,9 @@ current_ladders %>%
     breaks = c(50, 55, 60, 65, 70, 75), 
     expand = c(0, 0)
   ) +
+  annotate("text", label = "United States", x = 65, y = 7.3) +
+  annotate("text", label = "China", x = 71, y = 4.75) +
+  annotate("text", label = "India", x = 63.7, y = 3.7) +
   labs(
     x = "Healthy Life Expectancy",
     y = "Happiness Ladder Score",
@@ -242,6 +252,11 @@ current_ladders %>%
     size = 3, 
     colour = "black"
   ) +
+  annotate("text", label = "United States", x = 0.84, y = 7.6) +
+  geom_segment(aes(x = 0.84, y = 7.45, xend = 0.92, yend = 6.95), size= 0.1) +
+  annotate("text", label = "China", x = 0.7, y = 6) +
+  geom_segment(aes(x = 0.7, y = 5.85, xend = 0.8, yend = 5.5), size= 0.1) +
+  annotate("text", label = "India", x = 0.655, y = 3.6) +
   labs(
     x = "Social Support (Self Reported)",
     y = "Happiness Ladder Score",
@@ -252,7 +267,7 @@ current_ladders %>%
   guides(size = FALSE)
 ```
 
-In the World Happiness Survey, social support is quantified by a binary variable corresponding to the following question: "If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them, or not?". The average score is obtained for each country between 0 (no social support) and 1 (high social support). We see here that many countries in Europe, North America and ANZ, Latin America and the Caribbean, and Asia report very high levels of social support. India is an interesting outlier in our diagram with very low reported levels of social support; it would be an interesting extension of this work to try and understand the factors influencing social connectedness in India.
+In the World Happiness Survey, social support is quantified by a binary variable corresponding to the following question: "If you were in trouble, do you have relatives or friends you can count on to help you whenever you need them, or not?". The average score is obtained for each country between 0 (no social support) and 1 (high social support). We see here that many countries in Europe, North America, Australia, and New Zealand, Latin America and the Caribbean, and Asia report very high levels of social support. India is an interesting outlier in our diagram with very low reported levels of social support; it would be an interesting extension of this work to try and understand the factors influencing social connectedness in India.
 
 ```{r results=FALSE, warning=FALSE, message=FALSE}
 current_ladders %>% 
@@ -302,6 +317,11 @@ current_ladders %>%
     size = 3, 
     colour = "black"
   ) +
+  annotate("text", label = "United States", x = 0.8, y = 7.6) +
+  geom_segment(aes(x = 0.8, y = 7.45, xend = 0.84, yend = 6.95), size= 0.1) +
+  annotate("text", label = "China", x = 0.94, y = 4.6) +
+  geom_segment(aes(x = 0.94, y = 4.75, xend = 0.91, yend = 5.3), size= 0.1) +
+  annotate("text", label = "India", x = 0.945, y = 3.6) +
   labs(
     x = "Freedom of Choice (Self-Reported)",
     y = "Happiness Ladder Score",
@@ -363,6 +383,9 @@ current_ladders %>%
     size = 3, 
     colour = "black"
   ) +
+  annotate("text", label = "United States", x = 0.2, y = 8) +
+  geom_segment(aes(x = 0.13, y = 7.8, xend = 0.1, yend = 6.95), size= 0.1) +
+  annotate("text", label = "India", x = 0.145, y = 4.1) +
   labs(
     x = "Generosity (Self Reported)",
     y = "Happiness Ladder Score",
@@ -433,6 +456,12 @@ current_ladders %>%
     size = 3, 
     colour = "black"
   ) +
+  annotate("text", label = "United States", x = 0.8, y = 7.6) +
+  geom_segment(aes(x = 0.77, y = 7.45, xend = 0.7, yend = 6.95), size= 0.1) +
+  annotate("text", label = "China", x = 0.57, y = 4.6) +
+  geom_segment(aes(x = 0.57, y = 4.75, xend = 0.76, yend = 5.5), size= 0.1) +
+  annotate("text", label = "India", x = 0.93, y = 4.1) +
+  geom_segment(aes(x = 0.93, y = 3.95, xend = 0.77, yend = 3.8), size= 0.1) +
   labs(
     x = "Perceptions of Corruption",
     y = "Happiness Ladder Score",
