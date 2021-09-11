@@ -334,7 +334,7 @@ current_ladders %>%
 
 Like social support, the freedom of choice metric is a national average over the binary question: "Are you satisfied or dissatisfied with your freedom to choose what you do with your life?". 
 
-For this part, I actually had to remove Afghanistan because its freedom of choice score was so low - less than 0.4 - that it threw of the local regression curve. It's not a great time to be Afghani, unfortunately.
+For this part, I actually had to remove Afghanistan because its freedom of choice score was so low - less than 0.4 - that it threw of the local regression curve. 
 
 Otherwise, we see a gentle but noisy increase in happiness as freedom of choice expands for people. There does not seem to be as much geographic clustering for freedom of choice as there was for the other metrics we've looked at. Within Europe, for example, Norway has the highest freedom of choice score of 0.96, while Greece comes in last with a score of 0.562. That seems somewhat unsurprising given the poor financial and employment outcomes in Greece compared to its Northern and Western European counterparts. 
 
