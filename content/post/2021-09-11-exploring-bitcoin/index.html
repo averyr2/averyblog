@@ -1,0 +1,117 @@
+---
+title: Exploring Bitcion 
+author: Avery Rogers
+date: '2021-09-11'
+slug: exploring-bitcoin
+categories: []
+tags: []
+---
+
+
+
+<pre class="r"><code># Libraries
+
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.4     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   2.0.1     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(sqldf)</code></pre>
+<pre><code>## Loading required package: gsubfn</code></pre>
+<pre><code>## Loading required package: proto</code></pre>
+<pre><code>## Loading required package: RSQLite</code></pre>
+<pre class="r"><code>library(httr)
+library(jsonlite)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     flatten</code></pre>
+<pre class="r"><code>library(stringr)
+library(rvest)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<pre class="r"><code>library(Quandl)</code></pre>
+<pre><code>## Loading required package: xts</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## 
+## Attaching package: &#39;xts&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     first, last</code></pre>
+<pre class="r"><code>Quandl.api_key(&#39;13u77dMYTusnMgECS1zU&#39;)
+market_price_usd &lt;- Quandl(&#39;BCHAIN/MKPRU&#39;)
+usd_exchange_trade_volume &lt;- Quandl(&#39;BCHAIN/TRVOU&#39;)
+my_wallet_num_users &lt;-Quandl(&#39;BCHAIN/MWNUS&#39;)
+avg_block_size &lt;- Quandl(&#39;BCHAIN/AVBLS&#39;)
+median_transaction_time &lt;- Quandl(&#39;BCHAIN/ATRCT&#39;)
+miners_revenue &lt;- Quandl(&#39;BCHAIN/MIREV&#39;)
+cost_per_transaction &lt;- Quandl(&#39;BCHAIN/CPTRA&#39;)
+transaction_vol_usd_value &lt;- Quandl(&#39;BCHAIN/ETRVU&#39;)
+transaction_vol_value &lt;- Quandl(&#39;BCHAIN/ETRAV&#39;)
+num_transactions &lt;- Quandl(&#39;BCHAIN/NTRAN&#39;)
+mkt_cap &lt;- Quandl(&#39;BCHAIN/MKTCP&#39;)
+total_bitcoins &lt;- Quandl(&#39;BCHAIN/TOTBC&#39;)
+my_wallet_per_day &lt;- Quandl(&#39;BCHAIN/MWNTD&#39;)
+
+
+bitcoin_info &lt;- 
+  market_price_usd %&gt;% 
+  rename(mkt_price_usd = Value) %&gt;% 
+  left_join(usd_exchange_trade_volume, by = &quot;Date&quot;) %&gt;% 
+  rename(usd_exchange_trade_volume = Value) %&gt;% 
+  left_join(my_wallet_num_users, by = &quot;Date&quot;) %&gt;% 
+  rename(my_wallet_num_users = Value) %&gt;% 
+  left_join(avg_block_size, by = &quot;Date&quot;) %&gt;% 
+  rename(avg_block_size = Value) %&gt;% 
+  left_join(median_transaction_time, by = &quot;Date&quot;) %&gt;% 
+  rename(median_transaction_time = Value) %&gt;% 
+  left_join(miners_revenue, by = &quot;Date&quot;) %&gt;% 
+  rename(miners_revenue = Value) %&gt;% 
+  left_join(cost_per_transaction, by = &quot;Date&quot;) %&gt;% 
+  rename(cost_per_transaction = Value) %&gt;% 
+  left_join(transaction_vol_usd_value, by = &quot;Date&quot;) %&gt;% 
+  rename(transaction_vol_usd_value = Value) %&gt;% 
+  left_join(transaction_vol_value, by = &quot;Date&quot;) %&gt;% 
+  rename(transaction_vol_value = Value) %&gt;% 
+  left_join(num_transactions, by = &quot;Date&quot;) %&gt;% 
+  rename(num_transactions = Value) %&gt;% 
+  left_join(mkt_cap, by = &quot;Date&quot;) %&gt;% 
+  rename(mkt_cap = Value) %&gt;% 
+  left_join(total_bitcoins, by = &quot;Date&quot;) %&gt;% 
+  rename(total_bitcoins = Value) %&gt;% 
+  left_join(my_wallet_per_day, by = &quot;Date&quot;)  %&gt;% 
+  rename(my_wallet_per_day = Value) </code></pre>
+<pre class="r"><code>bitcoin_info &lt;- 
+  bitcoin_info %&gt;% 
+  filter(Date &lt; &quot;2021-09-12&quot;) %&gt;% 
+  rename(date = Date)</code></pre>
+<pre class="r"><code>bitcoin_info %&gt;% 
+  filter(year(date) &gt; 2015) %&gt;% 
+  arrange(date) %&gt;% 
+  mutate(mkt_price_growth = mkt_price_usd / first(mkt_price_usd) - 1) %&gt;% 
+  mutate(miners_revenue_growth = miners_revenue / first(miners_revenue) - 1) %&gt;% 
+  select(date, mkt_price_usd, mkt_price_growth, miners_revenue, miners_revenue_growth) %&gt;% 
+  ggplot(aes(date)) +
+  geom_line(aes(y = mkt_price_growth), color = &quot;blue&quot;) +
+  geom_line(aes(y = miners_revenue_growth), color = &quot;red&quot;) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1))</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
