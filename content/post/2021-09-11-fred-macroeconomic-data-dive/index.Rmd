@@ -1,0 +1,92 @@
+---
+title: Exploring Bitcion 
+author: Avery Rogers
+date: '2021-09-11'
+slug: exploring-bitcoin
+categories: []
+tags: []
+---
+
+```{r}
+# Libraries
+
+library(tidyverse)
+library(lubridate)
+library(sqldf)
+library(httr)
+library(jsonlite)
+library(stringr)
+library(rvest)
+library(Quandl)
+
+```
+
+
+```{r}
+Quandl.api_key('13u77dMYTusnMgECS1zU')
+market_price_usd <- Quandl('BCHAIN/MKPRU')
+usd_exchange_trade_volume <- Quandl('BCHAIN/TRVOU')
+my_wallet_num_users <-Quandl('BCHAIN/MWNUS')
+avg_block_size <- Quandl('BCHAIN/AVBLS')
+median_transaction_time <- Quandl('BCHAIN/ATRCT')
+miners_revenue <- Quandl('BCHAIN/MIREV')
+cost_per_transaction <- Quandl('BCHAIN/CPTRA')
+transaction_vol_usd_value <- Quandl('BCHAIN/ETRVU')
+transaction_vol_value <- Quandl('BCHAIN/ETRAV')
+num_transactions <- Quandl('BCHAIN/NTRAN')
+mkt_cap <- Quandl('BCHAIN/MKTCP')
+total_bitcoins <- Quandl('BCHAIN/TOTBC')
+my_wallet_per_day <- Quandl('BCHAIN/MWNTD')
+
+
+bitcoin_info <- 
+  market_price_usd %>% 
+  rename(mkt_price_usd = Value) %>% 
+  left_join(usd_exchange_trade_volume, by = "Date") %>% 
+  rename(usd_exchange_trade_volume = Value) %>% 
+  left_join(my_wallet_num_users, by = "Date") %>% 
+  rename(my_wallet_num_users = Value) %>% 
+  left_join(avg_block_size, by = "Date") %>% 
+  rename(avg_block_size = Value) %>% 
+  left_join(median_transaction_time, by = "Date") %>% 
+  rename(median_transaction_time = Value) %>% 
+  left_join(miners_revenue, by = "Date") %>% 
+  rename(miners_revenue = Value) %>% 
+  left_join(cost_per_transaction, by = "Date") %>% 
+  rename(cost_per_transaction = Value) %>% 
+  left_join(transaction_vol_usd_value, by = "Date") %>% 
+  rename(transaction_vol_usd_value = Value) %>% 
+  left_join(transaction_vol_value, by = "Date") %>% 
+  rename(transaction_vol_value = Value) %>% 
+  left_join(num_transactions, by = "Date") %>% 
+  rename(num_transactions = Value) %>% 
+  left_join(mkt_cap, by = "Date") %>% 
+  rename(mkt_cap = Value) %>% 
+  left_join(total_bitcoins, by = "Date") %>% 
+  rename(total_bitcoins = Value) %>% 
+  left_join(my_wallet_per_day, by = "Date")  %>% 
+  rename(my_wallet_per_day = Value) 
+  
+```
+
+```{r}
+bitcoin_info <- 
+  bitcoin_info %>% 
+  filter(Date < "2021-09-12") %>% 
+  rename(date = Date)
+```
+
+```{r}
+bitcoin_info %>% 
+  filter(year(date) > 2015) %>% 
+  arrange(date) %>% 
+  mutate(mkt_price_growth = mkt_price_usd / first(mkt_price_usd) - 1) %>% 
+  mutate(miners_revenue_growth = miners_revenue / first(miners_revenue) - 1) %>% 
+  select(date, mkt_price_usd, mkt_price_growth, miners_revenue, miners_revenue_growth) %>% 
+  ggplot(aes(date)) +
+  geom_line(aes(y = mkt_price_growth), color = "blue") +
+  geom_line(aes(y = miners_revenue_growth), color = "red") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1))
+
+```
+
