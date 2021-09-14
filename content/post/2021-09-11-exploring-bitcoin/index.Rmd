@@ -7,9 +7,11 @@ categories: []
 tags: []
 ---
 
-```{r}
-# Libraries
+```{r setup, include=FALSE}
+# Settings for chunks
+knitr::opts_chunk$set(echo = FALSE, results = FALSE, warning = FALSE)
 
+# Libraries
 library(tidyverse)
 library(lubridate)
 library(sqldf)
@@ -22,7 +24,7 @@ library(Quandl)
 ```
 
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 Quandl.api_key('13u77dMYTusnMgECS1zU')
 market_price_usd <- Quandl('BCHAIN/MKPRU')
 usd_exchange_trade_volume <- Quandl('BCHAIN/TRVOU')
@@ -69,14 +71,20 @@ bitcoin_info <-
   
 ```
 
-```{r}
+```{r results=FALSE, warning=FALSE, message=FALSE}
 bitcoin_info <- 
   bitcoin_info %>% 
   filter(Date < "2021-09-12") %>% 
   rename(date = Date)
 ```
 
-```{r}
+*Code can be found on Github [right here.](https://github.com/averyr2/r_averyblog/blob/master/content/post/2021-09-11-exploring-bitcoin/index.Rmd)
+
+I will admit that I'm historically something of a crypto skeptic - blame a mix of risk aversion and Silicon Valley's grandiose delusions. But as passes its 12th anniversary, I have come to accept that crypto is here to stay. As a result, I figured I might as well understand its meteoric rise and figure out where it's headed. 
+
+First, I look at Bitcoin's rise, along with the rise in miner revenue. Hindsight is painful, per usual. 
+
+```{r results=FALSE, warning=FALSE, message=FALSE}
 bitcoin_info %>% 
   filter(year(date) > 2015) %>% 
   arrange(date) %>% 
@@ -84,9 +92,18 @@ bitcoin_info %>%
   mutate(miners_revenue_growth = miners_revenue / first(miners_revenue) - 1) %>% 
   select(date, mkt_price_usd, mkt_price_growth, miners_revenue, miners_revenue_growth) %>% 
   ggplot(aes(date)) +
-  geom_line(aes(y = mkt_price_growth), color = "blue") +
-  geom_line(aes(y = miners_revenue_growth), color = "red") +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1))
+  geom_line(aes(y = mkt_price_growth, color = "Market Price Growth")) +
+  geom_line(aes(y = miners_revenue_growth, color = "Miners' Revenue Growth")) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  
+  labs(
+    x = "Date",
+    y = "Percent change in Value from Jan 1, 2016",
+    title = "The epic rise of Bitcoin",
+    subtitle = "Bitcoin's value has risen over 10,000% since 2016, miner revenue up 2,500%",
+  ) +
+  theme(legend.position="bottom") +
+  theme(legend.title=element_blank())
 
 ```
 
