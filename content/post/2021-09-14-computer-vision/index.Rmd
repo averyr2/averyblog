@@ -15,17 +15,17 @@ We used MIT's ADE20K dataset of scenes, which are labelled with their constituen
 
 Nonetheless, the project was a wonderful introduction to the sometimes elegant, sometimes messy world of convolutional neural networks for visual recognition. The paper is shown below.
 
-![](images/Kaplan_Rogers_CS231n_Final_Project.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 2.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 2.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 3.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 3.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 4.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 4.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 5.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 5.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 6.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 6.png){width=900px}
 
-![](images/Kaplan_Rogers_CS231n_Final_Project 7.png){width=800px}
+![](images/Kaplan_Rogers_CS231n_Final_Project 7.png){width=900px}
 
