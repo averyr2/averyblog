@@ -1,0 +1,31 @@
+---
+title: 'Computer Vision: Image Segmentation for Improved Scene Classification'
+author: Avery Rogers 
+date: '2021-09-14'
+slug: computer-vision
+categories: []
+tags: []
+---
+
+Thanks to Matthew Kaplan, my brilliant and dedicated project partner. 
+
+For Stanford's class CS231N: Convolutional Neural Networks for Visual Recognition, my partner Matthew and I decided to work on scene classification: how might a computer tell the difference between a beach, a city street, and a mountain range at sunset? Scenes are more difficult to classify than objects because of their complexity and the huge variance between images of the same scene type. For our project, we hypothesized that a scene classification algorithm could be improved by augmenting our vanilla classification algorithm with an algorithm to identify the shapes of objects within the image. By feeding our algorithm both the raw image and a learned map of the objects within that image, classification should be easier; for instance, identifying outlines of cars in an image rules out 'ocean' and 'artic tundra' as scene options. In practice, we opted to use image segmentation to identify object shapes.  
+
+We used MIT's ADE20K dataset of scenes, which are labelled with their constituent objects. We found that, when adding a ground-truth image segmentation mask to a raw image, our classification accuracy improved significantly. However, we were unable to get our segmentation algorithm to accurately build image segmentation masks. We noticed that the ground-truth masks provided by ADE20K seemed to selectively or arbitarily outline some objects and not others, so in a perfect world, we would re-try our algorithm with better-labelled data. (Unfortunately, the real world does not offer boundless training data). 
+
+Nonetheless, the project was a wonderful introduction to the sometimes elegant, sometimes messy world of convolutional neural networks for visual recognition. The paper is shown below.
+
+![](images/Kaplan_Rogers_CS231n_Final_Project.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 2.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 3.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 4.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 5.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 6.png){width=500px}
+
+![](images/Kaplan_Rogers_CS231n_Final_Project 7.png){width=500px}
+
