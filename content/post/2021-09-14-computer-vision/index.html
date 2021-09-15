@@ -13,10 +13,10 @@ tags: []
 <p>For Stanford’s class CS231N: Convolutional Neural Networks for Visual Recognition, my partner Matthew and I decided to work on scene classification: how might a computer tell the difference between a beach, a city street, and a mountain range at sunset? Scenes are more difficult to classify than objects because of their complexity and the huge variance between images of the same scene type. For our project, we hypothesized that a scene classification algorithm could be improved by augmenting our vanilla classification algorithm with an algorithm to identify the shapes of objects within the image. By feeding our algorithm both the raw image and a learned map of the objects within that image, classification should be easier; for instance, identifying outlines of cars in an image rules out ‘ocean’ and ‘artic tundra’ as scene options. In practice, we opted to use image segmentation to identify object shapes.</p>
 <p>We used MIT’s ADE20K dataset of scenes, which are labelled with their constituent objects. We found that, when adding a ground-truth image segmentation mask to a raw image, our classification accuracy improved significantly. However, we were unable to get our segmentation algorithm to accurately build image segmentation masks. We noticed that the ground-truth masks provided by ADE20K seemed to selectively or arbitarily outline some objects and not others, so in a perfect world, we would re-try our algorithm with better-labelled data. (Unfortunately, the real world does not offer boundless training data).</p>
 <p>Nonetheless, the project was a wonderful introduction to the sometimes elegant, sometimes messy world of convolutional neural networks for visual recognition. The paper is shown below.</p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%202.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%203.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%204.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%205.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%206.png" width="900" /></p>
-<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%207.png" width="900" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%202.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%203.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%204.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%205.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%206.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%207.png" width="1000" /></p>
