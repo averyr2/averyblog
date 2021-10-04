@@ -1,10 +1,11 @@
 ---
-title: Exploring Bitcion 
-author: Avery Rogers
+title: "Exploring Bitcoin"
+author: "Avery Rogers"
 date: '2021-09-11'
-slug: exploring-bitcoin
+output: pdf_document
 categories: []
 tags: []
+slug: exploring-bitcoin
 ---
 
 ```{r setup, include=FALSE}
@@ -107,3 +108,6 @@ bitcoin_info %>%
 
 ```
 
+We see that it was better to be an investor than a miner from 2016 to 2021 in terms of percentage growth, although I regret not being either! 
+
+**More data analysis to come soon** 

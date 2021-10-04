@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.68.3" />
+
+
+<title>Computer Vision: Image Segmentation for Improved Scene Classification - Avery&#39;s Data Blog</title>
+<meta property="og:title" content="Computer Vision: Image Segmentation for Improved Scene Classification - Avery&#39;s Data Blog">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/avery_logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/averyr2">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/avery-rogers-39750b167/">LinkedIn</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Computer Vision: Image Segmentation for Improved Scene Classification</h1>
+
+    
+    <span class="article-date">2021-09-14</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>Thanks to Matthew Kaplan, my brilliant and dedicated project partner.</p>
+<p>For Stanford’s class CS231N: Convolutional Neural Networks for Visual Recognition, my partner Matthew and I decided to work on scene classification: how might a computer tell the difference between a beach, a city street, and a mountain range at sunset? Scenes are more difficult to classify than objects because of their complexity and the huge variance between images of the same scene type. For our project, we hypothesized that a scene classification algorithm could be improved by augmenting our vanilla classification algorithm with an algorithm to identify the shapes of objects within the image. By feeding our algorithm both the raw image and a learned map of the objects within that image, classification should be easier; for instance, identifying outlines of cars in an image rules out ‘ocean’ and ‘artic tundra’ as scene options. In practice, we opted to use image segmentation to identify object shapes.</p>
+<p>We used MIT’s ADE20K dataset of scenes, which are labelled with their constituent objects. We found that, when adding a ground-truth image segmentation mask to a raw image, our classification accuracy improved significantly. However, we were unable to get our segmentation algorithm to accurately build image segmentation masks. We noticed that the ground-truth masks provided by ADE20K seemed to selectively or arbitarily outline some objects and not others, so in a perfect world, we would re-try our algorithm with better-labelled data. (Unfortunately, the real world does not offer boundless training data).</p>
+<p>Nonetheless, the project was a wonderful introduction to the sometimes elegant, sometimes messy world of convolutional neural networks for visual recognition. The paper is shown below.</p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%202.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%203.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%204.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%205.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%206.png" width="1000" /></p>
+<p><img src="images/Kaplan_Rogers_CS231n_Final_Project%207.png" width="1000" /></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+
